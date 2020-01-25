@@ -1,21 +1,20 @@
 import React from 'react'
-import {Link} from 'gatsby'
-
-import Layout from '../components/layout'
-import Image from '../components/image'
 import SEO from '../components/seo'
+import Nav from '../components/Nav'
+import Layout from '../components/Layout'
+import Showcase from '../components/Showcase'
+import {ThemeProvider} from '../utils/ThemeContext'
 
 const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{maxWidth: `300px`, marginBottom: `1.45rem`}}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
+  <>
+    <SEO title="Portfolio Site" />
+    <Layout>
+      <ThemeProvider>
+        <Nav />
+        <Showcase />
+      </ThemeProvider>
+    </Layout>
+  </>
 )
 
 export default IndexPage
