@@ -5,7 +5,7 @@ import color from '../utils/colorSchemes'
 const baseButton = styled.button`
   background: ${({background}) => background};
   border: none;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
   cursor: pointer;
   color: ${color.common.smoothWhite};
   font-weight: 600;

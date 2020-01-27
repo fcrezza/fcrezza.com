@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   }};
   padding: ${({isScrolled}) =>
     isScrolled ? `${toRem(8)} ${toRem(80)}` : `${toRem(20)} ${toRem(80)} 0`};
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
   ${mobile({display: 'none'})}
 `
 
@@ -45,13 +45,22 @@ const StyledNavbar = styled.nav`
   align-items: center;
 `
 
-const Navbar = ({yOffset}) => {
+const Navbar = ({isScrolled}) => {
   const theme = getThemeValue()
   return (
-    <Wrapper theme={theme} isScrolled={yOffset > 470}>
+    <Wrapper theme={theme} isScrolled={isScrolled}>
       <StyledNavbar>
         <Left>
           <Logo />
+          <Link
+            color={color.common.smoothWhite}
+            activeColor={color.common.white}
+            as="navlink"
+            to="#home"
+          >
+            Home
+          </Link>
+          <SmallDevider />
           <Link
             color={color.common.smoothWhite}
             activeColor={color.common.white}
@@ -96,5 +105,5 @@ const Navbar = ({yOffset}) => {
 export default Navbar
 
 Navbar.propTypes = {
-  yOffset: PropTypes.number.isRequired,
+  isScrolled: PropTypes.number.isRequired,
 }

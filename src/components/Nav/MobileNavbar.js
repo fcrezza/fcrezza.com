@@ -12,14 +12,18 @@ import github from '../../images/github.svg'
 import twitter from '../../images/twitter.svg'
 
 const Wrapper = styled.div`
-  background: ${({theme}) => {
-    if (theme === 'light') {
+  background: ${({isScrolled, theme}) => {
+    if (isScrolled && theme === 'light') {
       return color.light.blue
-    } else if (theme === 'dark') {
+    } else if (isScrolled && theme === 'dark') {
       return color.dark.darkBlue
+    } else {
+      return 'transparent'
     }
   }};
-  padding: 0 ${toRem(50)};
+  padding: ${({isScrolled}) =>
+    isScrolled ? `0 ${toRem(50)} 0` : `${toRem(20)} ${toRem(50)} 0`};
+  transition: all 0.4s ease;
   position: absolute;
   width: 100%;
   z-index: 2;
@@ -60,12 +64,13 @@ const Burger = styled.button`
 
 const Navigation = styled.nav`
   position: absolute;
+  top: ${({isScrolled}) => (isScrolled ? toRem(65) : toRem(85))};
   left: ${toRem(50)};
   right: ${toRem(50)};
+  height: ${({open}) => (open ? toRem(240) : 0)};
   flex-direction: column;
-  opacity: ${({open}) => (open ? 1 : 0)};
-  transform: ${({open}) => open && `translateY(${toRem(65)})`};
   transition: all 0.4s ease;
+  overflow: hidden;
   display: none;
   background: ${({theme}) =>
     theme === 'light' ? color.common.smoothWhite : color.dark.darkGrey};
@@ -79,10 +84,9 @@ const Navigation = styled.nav`
   }
 `
 
-const MobileNavbar = ({yOffset}) => {
+const MobileNavbar = ({isScrolled}) => {
   const [open, setOpen] = useState(true)
   const theme = getThemeValue()
-  const isScrolled = yOffset > 200
 
   return (
     <>
@@ -97,6 +101,21 @@ const MobileNavbar = ({yOffset}) => {
         </StyledMobileNavbar>
       </Wrapper>
       <Navigation theme={theme} open={open} isScrolled={isScrolled}>
+        <Link
+          as="navlink"
+          color={
+            theme === 'light' ? color.light.smoothDark : color.dark.smoothWhite
+          }
+          activeColor={theme === 'light' ? color.light.dark : color.dark.white}
+          backgroundActive={
+            theme === 'light' ? color.light.grey : color.dark.dark
+          }
+          block
+          active
+          to="#home"
+        >
+          Home
+        </Link>
         <Link
           as="navlink"
           color={
@@ -157,5 +176,5 @@ const MobileNavbar = ({yOffset}) => {
 export default MobileNavbar
 
 MobileNavbar.propTypes = {
-  yOffset: PropTypes.number.isRequired,
+  isScrolled: PropTypes.number.isRequired,
 }

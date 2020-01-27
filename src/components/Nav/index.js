@@ -5,18 +5,18 @@ import MobileNavbar from './MobileNavbar'
 import useScroll from '../../utils/useScroll'
 
 const StyledNav = styled.div`
-  position: ${({yOffset}) => (yOffset > 470 ? 'fixed' : 'absolute')};
+  position: ${({isScrolled}) => (isScrolled ? 'fixed' : 'absolute')};
   top: 0;
   left: 0;
   width: 100%;
-  transition: position 0.3s ease;
+  transition: position 0.4s ease;
 `
 const Nav = () => {
-  const yOffset = useScroll()
+  const isScrolled = useScroll()
   return (
-    <StyledNav yOffset={yOffset}>
-      <Navbar yOffset={yOffset} />
-      <MobileNavbar yOffset={yOffset} />
+    <StyledNav isScrolled={isScrolled}>
+      <Navbar isScrolled={isScrolled} />
+      <MobileNavbar isScrolled={isScrolled} />
     </StyledNav>
   )
 }

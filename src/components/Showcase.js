@@ -11,7 +11,7 @@ import hero from '../images/hero.svg'
 const StyledShowcase = styled.section`
   background: url(${hero});
   background-repeat: no-repeat;
-  height: ${toRem(600)};
+  height: ${toRem(608)};
   background-position: center;
   padding: 0 ${toRem(80)};
   display: flex;
@@ -22,29 +22,30 @@ const StyledShowcase = styled.section`
 
 const Wrapper = styled.div`
   display: flex;
-  height: 230px;
+  height: 270px;
   flex-direction: column;
   justify-content: space-between;
+  margin-top: ${toRem(30)};
 `
 
 const WelcomeMsg = styled.h3`
   color: ${color.common.white};
-  font-size: ${toRem(36)};
+  font-size: ${toRem(45)};
   margin: 0;
-  ${mobile({fontSize: toRem(30)})}
+  ${mobile({fontSize: toRem(35)})}
 `
 
 const Title = styled.h1`
   color: ${color.common.white};
-  font-size: ${toRem(55)};
+  font-size: ${toRem(60)};
   margin: 0;
-  ${mobile({fontSize: toRem(45)})}
+  ${mobile({fontSize: toRem(50)})}
 `
 const Subtitle = styled.p`
   color: ${color.common.smoothWhite};
-  font-size: ${toRem(30)};
+  font-size: ${toRem(40)};
   margin: 0;
-  ${mobile({fontSize: toRem(25)})}
+  ${mobile({fontSize: toRem(30)})}
 `
 
 const Showcase = () => {

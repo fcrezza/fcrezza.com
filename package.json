@@ -6,6 +6,7 @@
   "author": "Anang Fachreza <fachrezanang@gmail.com>",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
+    "@fortawesome/free-brands-svg-icons": "^5.12.0",
     "@fortawesome/free-solid-svg-icons": "^5.12.0",
     "@fortawesome/react-fontawesome": "^0.1.8",
     "gatsby": "^2.18.12",
@@ -21,6 +22,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
+    "react-spring": "^8.0.27",
     "styled-components": "^5.0.0",
     "typeface-cuprum": "0.0.72"
   },

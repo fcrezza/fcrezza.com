@@ -1,6 +1,7 @@
 const color = {
   common: {
     white: '#fff',
+    lightWhite: '#fdfdfd',
     smoothWhite: '#f4f4f4',
     lowDark: '#888',
   },
