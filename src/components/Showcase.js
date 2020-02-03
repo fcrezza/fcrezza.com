@@ -6,26 +6,38 @@ import {getThemeValue} from '../utils/ThemeContext'
 import toRem from '../utils/toRem'
 import color from '../utils/colorSchemes'
 import mobile from '../utils/mobile'
-import hero from '../images/hero.svg'
+import hero from '../images/hero.jpg'
 
 const StyledShowcase = styled.section`
   background: url(${hero});
   background-repeat: no-repeat;
+  background-size: cover;
   height: ${toRem(608)};
   background-position: center;
-  padding: 0 ${toRem(80)};
+  padding: 0 ${toRem(90)};
   display: flex;
   align-items: center;
-
+  position: relative;
   ${mobile({padding: `0 ${toRem(50)}`})}
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.4);
+  }
 `
 
 const Wrapper = styled.div`
   display: flex;
-  height: 270px;
+  height: ${toRem(300)};
   flex-direction: column;
   justify-content: space-between;
-  margin-top: ${toRem(30)};
+  margin-top: ${toRem(40)};
+  z-index: 1;
 `
 
 const WelcomeMsg = styled.h3`
@@ -43,7 +55,7 @@ const Title = styled.h1`
 `
 const Subtitle = styled.p`
   color: ${color.common.smoothWhite};
-  font-size: ${toRem(40)};
+  font-size: ${toRem(38)};
   margin: 0;
   ${mobile({fontSize: toRem(30)})}
 `
@@ -65,19 +77,13 @@ const Showcase = () => {
   )
 
   return (
-    <StyledShowcase>
+    <StyledShowcase id="home">
       <Wrapper>
         <WelcomeMsg>{site.siteMetadata.welcome}</WelcomeMsg>
         <Title>{site.siteMetadata.title}</Title>
         <Subtitle>{site.siteMetadata.subtitle}</Subtitle>
         <div>
-          <InlineButton
-            background={
-              theme === 'light' ? color.light.blue : color.dark.darkBlue
-            }
-          >
-            Send a message
-          </InlineButton>
+          <InlineButton className="navlink" data-name="contact" theme={theme}>Send a message</InlineButton>
         </div>
       </Wrapper>
     </StyledShowcase>

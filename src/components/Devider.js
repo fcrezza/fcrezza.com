@@ -7,7 +7,7 @@ export const SmallDevider = styled.div`
   height: 6px;
   background: ${color.common.smoothWhite};
   border-radius: 50%;
-  margin-right: ${toRem(12)};
+  margin-right: ${toRem(16)};
 `
 
 export const BigDevider = styled.div`
@@ -16,5 +16,5 @@ export const BigDevider = styled.div`
   background: ${({theme}) =>
     theme === 'light' ? color.light.grey : color.dark.strongGrey};
   border-radius: 50%;
-  margin-right: ${toRem(30)};
+  margin-right: ${toRem(32)};
 `

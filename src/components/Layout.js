@@ -19,7 +19,6 @@ const Global = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: 'Cuprum', sans-serif;
-    height: 10000px;
   }
 `
 const Layout = ({children}) => (

@@ -1,4 +1,4 @@
-import React, {createContext, useState, useContext} from 'react'
+import React, {createContext, useCallback, useState, useContext} from 'react'
 import PropTypes from 'prop-types'
 
 const ThemeValue = createContext()
@@ -7,9 +7,9 @@ const ThemeUpdater = createContext()
 const ThemeProvider = ({children}) => {
   const [theme, setTheme] = useState('light')
 
-  const handleSetTheme = () => {
+  const handleSetTheme = useCallback(() => {
     setTheme(prev => (prev === 'light' ? 'dark' : 'light'))
-  }
+  }, [])
 
   return (
     <ThemeValue.Provider value={theme}>

@@ -5,13 +5,23 @@ import toRem from '../../utils/toRem'
 
 const StyledLink = styled.a`
   text-decoration: none;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  font-family: 'Cuprum', sans-serif;
+  
+  &:focus,
+  &:hover {
+    outline: none;
+  }
 `
 
 const NavLink = styled(StyledLink)`
   color: ${({active, activeColor, color}) => (active ? activeColor : color)};
-  font-weight: ${({active}) => (active ? 600 : 400)};
-  font-size: ${toRem(21)};
-  margin-right: ${toRem(12)};
+  font-weight: 400;
+  font-size: ${toRem(23)};
+  margin-right: ${toRem(16)};
   transition: all 0.3s ease;
   background: ${({active, backgroundActive}) => active && backgroundActive};
 
@@ -25,7 +35,6 @@ const NavLink = styled(StyledLink)`
 
       &:hover,
       &:focus {
-        outline: none;
         background: ${backgroundActive};
         color: ${activeColor};
       }
@@ -36,7 +45,6 @@ const NavLink = styled(StyledLink)`
     css`
       &:hover,
       &:focus {
-        outline: none;
         color: ${activeColor};
       }
     `};
@@ -47,20 +55,13 @@ const SocialLink = styled(StyledLink).attrs({
 })`
   margin-right: ${toRem(26)};
   display: inline-block;
-  transition: transform 0.3s ease;
-
-  img {
-    display: block;
-    width: ${toRem(25)};
-    height: ${toRem(25)};
-  }
 `
 
-const Link = ({as, active, children, to, ...rest}) => {
+const Link = ({type, active, children, to, ...rest}) => {
   let LinkType
-  if (as === 'navlink') {
+  if (type === 'navlink') {
     LinkType = NavLink
-  } else if (as === 'sociallink') {
+  } else if (type === 'sociallink') {
     LinkType = SocialLink
   } else {
     LinkType = StyledLink
@@ -75,8 +76,8 @@ const Link = ({as, active, children, to, ...rest}) => {
 export default Link
 
 Link.propTypes = {
-  as: PropTypes.string,
-  active: PropTypes.bool.isRequired,
+  type: PropTypes.string,
+  active: PropTypes.bool,
   children: PropTypes.node.isRequired,
-  to: PropTypes.string.isRequired,
+  to: PropTypes.string,
 }
