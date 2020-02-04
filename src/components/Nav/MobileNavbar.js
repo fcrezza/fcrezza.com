@@ -7,7 +7,7 @@ import {faGithub, faTwitter} from '@fortawesome/free-brands-svg-icons'
 import Logo from './Logo'
 import Link from './Link'
 import {getThemeValue, getThemeUpdater} from '../../utils/ThemeContext'
-import mobile from '../../utils/mobile'
+import mobile, {phone} from '../../utils/mobile'
 import color from '../../utils/colorSchemes'
 import toRem from '../../utils/toRem'
 import isLight from '../../utils/isLight'
@@ -31,6 +31,10 @@ const Wrapper = styled.div`
   z-index: 2;
   display: none;
   ${mobile({display: 'block'})}
+  ${phone({
+    padding: ({isScrolled}) =>
+      isScrolled ? `0 ${toRem(30)} 0` : `${toRem(20)} ${toRem(30)} 0`,
+  })}
 `
 
 const StyledMobileNavbar = styled.div`
@@ -76,6 +80,7 @@ const Navigation = styled.nav`
   background: ${({theme}) =>
     isLight(theme) ? color.common.smoothWhite : color.dark.darkGrey};
   ${mobile({display: 'flex'})}
+  ${phone({left: 30, right: 30})}
 
   div {
     padding: ${toRem(15)} 0;

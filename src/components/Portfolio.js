@@ -5,7 +5,7 @@ import {faEdit} from '@fortawesome/free-solid-svg-icons'
 import Swiper from 'swiper'
 import {getThemeValue} from '../utils/ThemeContext'
 import toRem from '../utils/toRem'
-import mobile from '../utils/mobile'
+import mobile, {phone} from '../utils/mobile'
 import isLight from '../utils/isLight'
 import color from '../utils/colorSchemes'
 import hero from '../images/hero.jpg'
@@ -22,13 +22,15 @@ const Wrapper = styled.div`
   color: ${color.common.smoothWhite};
   font-size: ${toRem(40)};
   ${mobile({padding: `${toRem(30)} ${toRem(50)}`})}
+  ${phone({padding: `${toRem(30)} ${toRem(30)}`})}
 `
 
 const Message = styled.div`
-  width: ${toRem(550)};
+  max-width: ${toRem(550)};
   text-align: center;
   font-style: italic;
   line-height: 1.3;
+  ${mobile({fontSize: toRem(34)})}
 
   div {
     margin: ${toRem(10)} 0 0;
@@ -38,20 +40,24 @@ const Message = styled.div`
 const PortfolioSection = styled.section`
   background: ${({theme}) =>
     isLight(theme) ? color.common.lightWhite : color.dark.dark};
-  padding: ${toRem(80)} 0;
+  padding: ${toRem(80)} ${toRem(90)};
   display: flex;
   align-items: center;
   justify-content: center;
+  ${mobile({padding: `${toRem(60)} ${toRem(50)}`})}
+  ${phone({padding: `${toRem(50)} ${toRem(30)}`})}
 `
 
 const SliderContainer = styled.div`
   max-width: ${toRem(900)};
   width: 100%;
-  height: ${toRem(550)};
+  max-height: ${toRem(550)};
 `
 
 const SliderItem = styled.div`
   position: relative;
+  width: 100%;
+  height: 100%;
 
   &::before {
     content: '';
@@ -78,18 +84,21 @@ const SliderItem = styled.div`
     padding: ${toRem(45)};
     top: 50%;
     transform: translateY(-20%);
+  ${phone({padding: toRem(30), transform: 'translateY(-35%)'})}
   }
 
   .title {
     margin: 0 0 ${toRem(18)};
     color: ${color.common.smoothWhite};
     font-size: ${toRem(45)};
+    ${phone({fontSize: toRem(35), margin: `0 0 ${toRem(14)}`})}
   }
 
   .subtitle {
     margin: 0 0 ${toRem(20)};
     color: ${color.common.lightWhite};
     font-size: ${toRem(30)};
+    ${phone({fontSize: toRem(23), margin: `0 0 ${toRem(15)}`})}
   }
 
   .link {
@@ -100,7 +109,7 @@ const SliderItem = styled.div`
     background: ${({theme}) =>
       isLight(theme) ? color.light.blue : color.dark.darkBlue};
     color: ${color.common.smoothWhite};
-  }
+    ${phone({fontSize: toRem(15), padding: `${toRem(6)} ${toRem(10)}`})}
 `
 
 const Portfolio = () => {

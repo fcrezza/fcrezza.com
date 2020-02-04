@@ -11,10 +11,10 @@ export const SmallDevider = styled.div`
 `
 
 export const BigDevider = styled.div`
-  width: 12px;
-  height: 12px;
+  min-width: 12px;
+  min-height: 12px;
   background: ${({theme}) =>
     theme === 'light' ? color.light.grey : color.dark.strongGrey};
   border-radius: 50%;
-  margin-right: ${toRem(32)};
+  margin: 0 ${toRem(32)};
 `

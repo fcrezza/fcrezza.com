@@ -5,7 +5,7 @@ import {InlineButton} from './Button'
 import {getThemeValue} from '../utils/ThemeContext'
 import toRem from '../utils/toRem'
 import color from '../utils/colorSchemes'
-import mobile from '../utils/mobile'
+import mobile, {phone} from '../utils/mobile'
 import hero from '../images/hero.jpg'
 
 const StyledShowcase = styled.section`
@@ -19,6 +19,7 @@ const StyledShowcase = styled.section`
   align-items: center;
   position: relative;
   ${mobile({padding: `0 ${toRem(50)}`})}
+  ${phone({padding: `0 ${toRem(30)}`})}
 
   &::before {
     content: '';
@@ -38,6 +39,9 @@ const Wrapper = styled.div`
   justify-content: space-between;
   margin-top: ${toRem(40)};
   z-index: 1;
+
+  ${mobile({height: toRem(270)})}
+  ${phone({height: toRem(300)})}
 `
 
 const WelcomeMsg = styled.h3`
@@ -45,6 +49,7 @@ const WelcomeMsg = styled.h3`
   font-size: ${toRem(45)};
   margin: 0;
   ${mobile({fontSize: toRem(35)})}
+  ${phone({fontSize: toRem(30)})}
 `
 
 const Title = styled.h1`
@@ -52,12 +57,14 @@ const Title = styled.h1`
   font-size: ${toRem(60)};
   margin: 0;
   ${mobile({fontSize: toRem(50)})}
+  ${phone({fontSize: toRem(45)})}
 `
 const Subtitle = styled.p`
   color: ${color.common.smoothWhite};
   font-size: ${toRem(38)};
   margin: 0;
   ${mobile({fontSize: toRem(30)})}
+  ${phone({fontSize: toRem(27)})}
 `
 
 const Showcase = () => {
@@ -83,7 +90,9 @@ const Showcase = () => {
         <Title>{site.siteMetadata.title}</Title>
         <Subtitle>{site.siteMetadata.subtitle}</Subtitle>
         <div>
-          <InlineButton className="navlink" data-name="contact" theme={theme}>Send a message</InlineButton>
+          <InlineButton className="navlink" data-name="contact" theme={theme}>
+            Send a message
+          </InlineButton>
         </div>
       </Wrapper>
     </StyledShowcase>

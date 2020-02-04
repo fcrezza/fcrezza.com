@@ -12,20 +12,22 @@ import {BigDevider} from './Devider'
 import {getThemeValue} from '../utils/ThemeContext'
 import color from '../utils/colorSchemes'
 import toRem from '../utils/toRem'
-import mobile from '../utils/mobile'
+import mobile, {phone} from '../utils/mobile'
 import isLight from '../utils/isLight'
 
 const WorkSection = styled.section`
   background: ${({theme}) =>
     isLight(theme) ? color.common.lightWhite : color.dark.dark};
   transition: all 0.4s ease;
+  padding: ${toRem(20)} ${toRem(90)};
+  ${mobile({padding: `${toRem(20)} ${toRem(50)}`})}
+  ${phone({padding: `${toRem(20)} ${toRem(30)}`})}
 `
 
 const WorkWrapper = styled.div`
   max-width: ${toRem(900)};
-  padding: ${toRem(20)} 0;
-  margin: 0 auto;
   width: 100%;
+  margin: 0 auto;
   display: flex;
   align-items: center;
 `
@@ -35,13 +37,11 @@ const Message = styled.p`
     isLight(theme) ? color.light.smoothDark : color.dark.smoothWhite};
   font-size: ${toRem(29)};
   margin-right: ${toRem(110)};
+  ${mobile({fontSize: toRem(25), marginRight: toRem(70)})}
+  ${phone({marginRight: toRem(60)})}
 `
 
 const Stack = styled.div`
-  &:not(:last-child) {
-    margin-right: ${toRem(32)};
-  }
-
   svg {
     transition: color 0.4s;
   }
@@ -50,6 +50,8 @@ const Stack = styled.div`
 const StackWrapper = styled.div`
   display: flex;
   align-items: center;
+  ${mobile({overflowX: 'auto', marginLeft: 'auto'})}
+  ${phone({width: toRem(170)})}
 `
 
 const Work = () => {
@@ -106,11 +108,7 @@ const Work = () => {
             <FontAwesomeIcon
               icon={faHtml5}
               size="4x"
-              color={
-                id === 'html'
-                  ? stackColor.active
-                  : stackColor.color
-              }
+              color={id === 'html' ? stackColor.active : stackColor.color}
             />
           </Stack>
           <BigDevider theme={theme} />
@@ -118,11 +116,7 @@ const Work = () => {
             <FontAwesomeIcon
               icon={faCss3Alt}
               size="4x"
-              color={
-                id === 'css'
-                  ? stackColor.active
-                  : stackColor.color
-              }
+              color={id === 'css' ? stackColor.active : stackColor.color}
             />
           </Stack>
           <BigDevider theme={theme} />
@@ -130,11 +124,7 @@ const Work = () => {
             <FontAwesomeIcon
               icon={faJs}
               size="4x"
-              color={
-                id === 'js'
-                  ? stackColor.active
-                  : stackColor.color
-              }
+              color={id === 'js' ? stackColor.active : stackColor.color}
             />
           </Stack>
           <BigDevider theme={theme} />
@@ -142,11 +132,7 @@ const Work = () => {
             <FontAwesomeIcon
               icon={faReact}
               size="4x"
-              color={
-                id === 'react'
-                  ? stackColor.active
-                  : stackColor.color
-              }
+              color={id === 'react' ? stackColor.active : stackColor.color}
             />
           </Stack>
         </StackWrapper>
