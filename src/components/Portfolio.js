@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useEffect, useRef} from 'react'
 import styled from 'styled-components'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faEdit} from '@fortawesome/free-solid-svg-icons'
@@ -58,23 +58,32 @@ const SliderItem = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+
+  &:hover, &:focus {
+    .background {
+      transform: scale(1.5);
+    }
+
+    &::before {
+      background: rgba(0,0,0,0.3);
+    }
+  }
 
   &::before {
     content: '';
     position: absolute;
     width: 100%;
     height: 100%;
-    background: ${({hover}) =>
-      hover ? 'rgba(0, 0, 0, 0.3)' : 'rgba(0, 0, 0, 0.4)'};
-    z-index: 1;
+    background: rgba(0, 0, 0, 0.4);
     transition: background 0.4s;
+    z-index: 1;
   }
 
   .background {
     display: block;
     width: 100%;
     height: 100%;
-    transform: ${({hover}) => (hover ? 'scale(1.5)' : 'scale(1)')};
     transition: transform 0.4s;
   }
 
@@ -84,14 +93,14 @@ const SliderItem = styled.div`
     padding: ${toRem(45)};
     top: 50%;
     transform: translateY(-20%);
-  ${phone({padding: toRem(30), transform: 'translateY(-35%)'})}
+  ${phone({padding: toRem(30), transform: 'translateY(-45%)'})}
   }
 
   .title {
     margin: 0 0 ${toRem(18)};
     color: ${color.common.smoothWhite};
     font-size: ${toRem(45)};
-    ${phone({fontSize: toRem(35), margin: `0 0 ${toRem(14)}`})}
+    ${phone({fontSize: toRem(32), margin: `0 0 ${toRem(14)}`})}
   }
 
   .subtitle {
@@ -114,16 +123,13 @@ const SliderItem = styled.div`
 
 const Portfolio = () => {
   const theme = getThemeValue()
-  const [hover, setHover] = useState('')
   const mySwiper = useRef()
 
-  const handleMouseEnter = ({target}) => {
-    setHover(target.dataset.id)
+  const handleMouseEnter = () => {
     mySwiper.current.autoplay.stop()
   }
 
   const handleMouseLeave = () => {
-    setHover('')
     mySwiper.current.autoplay.start()
   }
 
@@ -155,14 +161,11 @@ const Portfolio = () => {
         </Message>
       </Wrapper>
       <PortfolioSection id="portfolio" theme={theme}>
-        <SliderContainer
-          className="swiper-container"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
+        <SliderContainer className="swiper-container">
           <div className="swiper-wrapper">
             <SliderItem
-              hover={hover === '1'}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
               className="swiper-slide"
               data-id="1"
               theme={theme}
@@ -182,7 +185,8 @@ const Portfolio = () => {
               </div>
             </SliderItem>
             <SliderItem
-              hover={hover === '2'}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
               className="swiper-slide"
               data-id="2"
               theme={theme}
@@ -202,7 +206,8 @@ const Portfolio = () => {
               </div>
             </SliderItem>
             <SliderItem
-              hover={hover === '3'}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
               className="swiper-slide"
               data-id="3"
               theme={theme}

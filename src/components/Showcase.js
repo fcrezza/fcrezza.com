@@ -41,7 +41,7 @@ const Wrapper = styled.div`
   z-index: 1;
 
   ${mobile({height: toRem(270)})}
-  ${phone({height: toRem(300)})}
+  ${phone({height: toRem(300), textAlign: 'center'})}
 `
 
 const WelcomeMsg = styled.h3`
