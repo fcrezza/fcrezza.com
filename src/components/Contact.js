@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import axios from 'axios'
 import {Formik, Form, Field, ErrorMessage} from 'formik'
 import {object, string} from 'yup'
 import {BlockButton} from './Button'
@@ -9,6 +10,7 @@ import color from '../utils/colorSchemes'
 import toRem from '../utils/toRem'
 import mobile, {phone} from '../utils/mobile'
 import isLight from '../utils/isLight'
+import encode from '../utils/encode'
 
 const Wrapper = styled.section`
   background: ${({theme}) =>
@@ -109,8 +111,19 @@ const Contact = () => {
           })}
           validateOnChange={false}
           validateOnBlur={false}
-          onSubmit={values => {
-            console.log(JSON.stringify(values, null, 2))
+          onSubmit={({email, message}) => {
+            axios
+              .post('/', encode({'form-name': 'contact', email, message}), {
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                },
+              })
+              .then(res => {
+                console.log(res.data)
+              })
+              .catch(err => {
+                console.log(err)
+              })
           }}
         >
           <Form>
