@@ -81,8 +81,14 @@ Message.propTypes = {
   type: PropTypes.string.isRequired,
 }
 
-const modalContainer = document.getElementById('modal')
-const div = document.createElement('div')
+const isSSR = () => typeof window === 'undefined' || !window.document
+let modalContainer
+let div
+
+if (!isSSR()) {
+  modalContainer = document.getElementById('modal')
+  div = document.createElement('div')
+}
 
 const Modal = ({type, toggleModal}) => {
   const el = useRef()
@@ -94,12 +100,16 @@ const Modal = ({type, toggleModal}) => {
   }
 
   useEffect(() => {
+    if (!isSSR()) {
+      document.addEventListener('click', handleClickOutside)
+    }
     modalContainer.appendChild(div)
-    document.addEventListener('click', handleClickOutside)
 
     return () => {
+      if (!isSSR()) {
+        document.removeEventListener('click', handleClickOutside)
+      }
       modalContainer.removeChild(div)
-      document.removeEventListener('click', handleClickOutside)
     }
   }, [])
 
