@@ -77,7 +77,7 @@ const Right = styled.div`
 `
 
 const ErrorMsg = styled.p`
-  color: red;
+  color: #f5587b;
   margin: 0 0 ${toRem(15)};
 `
 
@@ -91,48 +91,76 @@ CustomErrorMessage.propTypes = {
   name: PropTypes.string.isRequired,
 }
 
-const Contact = () => {
+const Contact = ({handleSetType, toggleModal}) => {
   const theme = getThemeValue()
 
   return (
-    <Wrapper id="contact" theme={theme}>
-      <Left theme={theme}>
-        <h2>Want to make your beautiful website?</h2>
-        <h1>Send a message to me!</h1>
-      </Left>
-      <Right theme={theme}>
-        <Formik
-          initialValues={{email: '', message: ''}}
-          validationSchema={object({
-            email: string()
-              .email('please enter a valid email')
-              .required('field must be filled in'),
-            message: string().required('field must be filled in'),
-          })}
-          validateOnChange={false}
-          validateOnBlur={false}
-          onSubmit={({email, message}) => {
-            axios.post('/', encode({'form-name': 'contact', email, message}), {
-              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            })
-          }}
-        >
-          <Form name="contact" data-netlify="true">
-            <input type="hidden" name="form-name" value="contact" />
-            <Field name="email" type="email" placeholder="Your email" />
-            <CustomErrorMessage name="email" />
-            <Field
-              name="message"
-              as="textarea"
-              placeholder="Enter your message here"
-            />
-            <CustomErrorMessage name="message" />
-            <BlockButton type="submit">Send</BlockButton>
-          </Form>
-        </Formik>
-      </Right>
-    </Wrapper>
+    <>
+      <Wrapper id="contact" theme={theme}>
+        <Left theme={theme}>
+          <h2>Want to make your beautiful website?</h2>
+          <h1>Send a message to me!</h1>
+        </Left>
+        <Right theme={theme}>
+          <Formik
+            initialValues={{email: '', message: ''}}
+            validationSchema={object({
+              email: string()
+                .email('please enter a valid email')
+                .required('field must be filled in'),
+              message: string().required('field must be filled in'),
+            })}
+            validateOnChange={false}
+            validateOnBlur={false}
+            onSubmit={({email, message}, {setSubmitting, resetForm}) => {
+              setSubmitting(true)
+              resetForm()
+              axios
+                .post('/', encode({'form-name': 'contact', email, message}), {
+                  headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                  },
+                })
+                .then(() => {
+                  setSubmitting(false)
+                  toggleModal()
+                  handleSetType('success')
+                })
+                .catch(() => {
+                  setSubmitting(false)
+                  toggleModal()
+                  handleSetType('error')
+                })
+            }}
+          >
+            {({isSubmitting}) => {
+              return (
+                <Form name="contact" data-netlify="true">
+                  <input type="hidden" name="form-name" value="contact" />
+                  <Field name="email" type="email" placeholder="Your email" />
+                  <CustomErrorMessage name="email" />
+                  <Field
+                    name="message"
+                    as="textarea"
+                    placeholder="Enter your message here"
+                  />
+                  <CustomErrorMessage name="message" />
+                  <BlockButton type="submit">
+                    {isSubmitting ? 'Sending message...' : 'Send'}
+                  </BlockButton>
+                </Form>
+              )
+            }}
+          </Formik>
+        </Right>
+      </Wrapper>
+    </>
   )
 }
 
 export default Contact
+
+Contact.propTypes = {
+  handleSetType: PropTypes.func.isRequired,
+  toggleModal: PropTypes.func.isRequired,
+}
