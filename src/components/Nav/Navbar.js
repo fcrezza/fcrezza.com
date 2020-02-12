@@ -43,8 +43,8 @@ const StyledNavbar = styled.nav`
 `
 
 const Navbar = ({isScrolled}) => {
-  const clickToScroll = useClickToScroll('.nav-btn')
-   
+  const active = useClickToScroll('.nav-btn')
+  
   return (
     <Wrapper isScrolled={isScrolled}>
       <StyledNavbar>
@@ -53,7 +53,7 @@ const Navbar = ({isScrolled}) => {
           <NavButton
             data-name="home"
             className="nav-btn"
-            active={isScrolled < 600}
+            active={active === "home"}
           >
             Home
           </NavButton>
@@ -61,7 +61,7 @@ const Navbar = ({isScrolled}) => {
           <NavButton
             data-name="about"
             className="nav-btn"
-            active={isScrolled >= 600 && isScrolled < 1273}
+            active={active === "about"}
           >
             About
           </NavButton>
@@ -69,13 +69,13 @@ const Navbar = ({isScrolled}) => {
           <NavButton
             data-name="portfolio"
             className="nav-btn"
-            active={isScrolled >= 1273 && isScrolled < 1629}
+            active={active === "portfolio"}
           >
             Portfolio
           </NavButton>
           <SmallDevider />
           <NavButton
-            active={isScrolled >= 1629}
+            active={active === "contact"}
             className="nav-btn"
             data-name="contact"
           >

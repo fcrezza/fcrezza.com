@@ -52,6 +52,7 @@ const SliderWrapper = styled.div`
   max-width: ${toRem(900)};
   max-height: ${toRem(550)};
   display: flex;
+  width: 100%;
 
   ${mobile({width: '85%'})}
   ${phone({width: '75%'})}
@@ -167,8 +168,8 @@ const Portfolio = () => {
 
   useEffect(() => {
     swiperInit.current = new Swiper('.swiper-container', {
-      slidesPerView: window.innerWidth > 768 ? 2 : 1,
-      slidesPerGroup: window.innerWidth > 768 ? 2 : 1,
+      slidesPerView: window.innerWidth > 850 ? 2 : 1,
+      slidesPerGroup: window.innerWidth > 850 ? 2 : 1,
       spaceBetween: 20,
       navigation: {
         prevEl: '.prev-btn',

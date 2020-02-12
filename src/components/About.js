@@ -34,8 +34,7 @@ const Left = styled.div`
 
 const Right = styled.div`
   width: ${toRem(400)};
-  ${mobile({width: 400})}
-
+  
   h2 {
     color: ${colors.black};
     font-size: ${toRem(45)};

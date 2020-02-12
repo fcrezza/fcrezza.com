@@ -8,7 +8,7 @@ const FooterWrapper = styled.footer`
 	padding: ${toRem(28)};
 	text-align: center;
 	color: ${colors.smoothWhite};
-	font-size: ${toRem(21)};
+	font-size: ${toRem(22)};
 	transition: background 0.4s;
 
 	a {

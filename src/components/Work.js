@@ -32,7 +32,7 @@ const Message = styled.p`
   font-size: ${toRem(29)};
   margin-right: ${toRem(110)};
   ${mobile({fontSize: toRem(25), marginRight: toRem(70)})}
-  ${phone({marginRight: toRem(50)})}
+  ${phone({fontSize: toRem(23), marginRight: toRem(30)})}
 `
 
 const StackWrapper = styled.div`

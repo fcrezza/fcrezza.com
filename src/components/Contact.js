@@ -29,7 +29,7 @@ const Left = styled.div`
     color: ${colors.black};
     font-weight: 700;
     margin: 0;
-    font-size: ${toRem(55)};
+    font-size: ${toRem(50)};
     ${mobile({fontSize: toRem(40)})}
     ${phone({fontSize: toRem(35)})}
   }
@@ -37,7 +37,7 @@ const Left = styled.div`
   h2 {
     color: ${colors.smoothBlack};
     margin: 0;
-    font-size: ${toRem(35)};
+    font-size: ${toRem(32)};
     font-weight: 400;
     margin-bottom: ${toRem(26)};
     ${mobile({fontSize: toRem(30)})}

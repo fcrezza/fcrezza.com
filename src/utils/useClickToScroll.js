@@ -1,12 +1,14 @@
-import {useEffect} from 'react'
+import {useState, useEffect} from 'react'
 
 const ClickToScroll = classname => {
+	const [active, setActive] = useState('home')
+
 	useEffect(() => {
 		const isIE11 = !!window.MSInputMethodContext && !!document.documentMode
 		const listOfLinks = document.querySelectorAll(classname)
-		
 		listOfLinks.forEach(link => {
 			link.addEventListener('click', () => {
+				setActive(link.dataset.name)
 				if (isIE11) {
 					window.scrollTo(
 						0,
@@ -25,6 +27,7 @@ const ClickToScroll = classname => {
 		return () => {
 			listOfLinks.forEach(link => {
 				link.removeEventListener('click', () => {
+					setActive(link.dataset.name)
 					if (isIE11) {
 						window.scrollTo(
 							0,
@@ -42,6 +45,8 @@ const ClickToScroll = classname => {
 			})
 		}
 	}, [])
+
+	return active
 }
 
 export default ClickToScroll

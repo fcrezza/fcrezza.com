@@ -23,20 +23,19 @@ const StyledShowcase = styled.section`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: ${toRem(310)};
   align-items: center;
   margin-top: ${toRem(40)};
   z-index: 1;
+  text-align: center;
 
   ${mobile({height: toRem(270)})}
-  ${phone({height: toRem(280), textAlign: 'center'})}
+  ${phone({height: toRem(280)})}
 `
 
 const WelcomeMsg = styled.h3`
   color: ${colors.white};
   font-size: ${toRem(45)};
-  margin: 0;
+  margin: 0 0 ${toRem(25)};
   font-weight: 600;
   ${mobile({fontSize: toRem(35)})}
   ${phone({fontSize: toRem(30)})}
@@ -45,7 +44,7 @@ const WelcomeMsg = styled.h3`
 const Title = styled.h1`
   color: ${colors.white};
   font-size: ${toRem(60)};
-  margin: 0;
+  margin: 0 0 ${toRem(25)};
   font-weight: 700;
   ${mobile({fontSize: toRem(50)})}
   ${phone({fontSize: toRem(40)})}
@@ -53,7 +52,7 @@ const Title = styled.h1`
 const Subtitle = styled.p`
   color: ${colors.smoothWhite};
   font-size: ${toRem(38)};
-  margin: 0;
+  margin: 0 0 ${toRem(25)};
   ${mobile({fontSize: toRem(30)})}
   ${phone({fontSize: toRem(27)})}
 `

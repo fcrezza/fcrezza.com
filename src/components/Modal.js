@@ -44,8 +44,8 @@ const CloseBtn = styled.button`
   padding: ${toRem(8)} ${toRem(12)};
   position: absolute;
   font-size: ${toRem(18)};
-  bottom: ${toRem(20)};
-  right: ${toRem(25)};
+  bottom: ${toRem(25)};
+  right: ${toRem(40)};
   outline: none;
   cursor: pointer;
   color: ${({color}) => (color === 'success' ? colors.purple : colors.pink)};
@@ -67,7 +67,7 @@ const MessageWrapper = styled.div`
   .subtitle {
     color: ${colors.smoothBlack};
     font-size: ${toRem(25)};
-    margin: 0 0 ${toRem(25)};
+    margin: 0 0 ${toRem(60)};
     font-size: ${toRem(25)};
     ${phone({fontSize: toRem(20)})}
   }

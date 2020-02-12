@@ -71,7 +71,7 @@ const Navigation = styled.nav`
   height: ${({open}) => (open ? toRem(240) : 0)};
   transition: height 0.3s ease;
   flex-direction: column;
-  overflow: hidden;
+  overflow-y: auto;
   display: none;
   background: ${colors.smoothWhite};
   box-shadow: 0 0 ${toRem(30)} rgba(${hexToRGB(colors.black)},0.5);
@@ -88,7 +88,7 @@ const Navigation = styled.nav`
 
 const MobileNavbar = ({isScrolled}) => {
   const [open, setOpen] = useState(false)
-  const clickToScroll = useClickToScroll('.nav-btn')  
+  const active = useClickToScroll('.nav-btn')  
 
   return (
     <>
@@ -105,7 +105,7 @@ const MobileNavbar = ({isScrolled}) => {
       <Navigation open={open} isScrolled={isScrolled}>
         <NavButtonBlock
           onClick={() => setOpen(!open)}
-          active={isScrolled < 616}
+          active={active === "home"}
           data-name="home"
           className="nav-btn"
         >
@@ -113,7 +113,7 @@ const MobileNavbar = ({isScrolled}) => {
         </NavButtonBlock>
         <NavButtonBlock
         onClick={() => setOpen(!open)}
-          active={isScrolled >= 616 && isScrolled < 1095}
+          active={active === "about"}
           data-name="about"
           className="nav-btn"
         >
@@ -121,7 +121,7 @@ const MobileNavbar = ({isScrolled}) => {
         </NavButtonBlock>
         <NavButtonBlock
         onClick={() => setOpen(!open)}
-          active={isScrolled >= 1095 && isScrolled < 1415}
+          active={active === "portfolio"}
           data-name="portfolio"
           className="nav-btn"
         >
@@ -129,7 +129,7 @@ const MobileNavbar = ({isScrolled}) => {
         </NavButtonBlock>
         <NavButtonBlock
         onClick={() => setOpen(!open)}
-          active={isScrolled >= 1415}
+          active={active === "contact"}
           data-name="contact"
           className="nav-btn"
         >
