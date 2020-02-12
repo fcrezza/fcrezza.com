@@ -49,7 +49,7 @@ function SEO({description, lang, meta, title}) {
         },
         {
           property: `og:image`,
-          content: ``,
+          content: `https://raw.githubusercontent.com/fcrezza/portfolio-site/master/src/images/screenshot.png`,
         },
         {
           name: `twitter:card`,
@@ -73,7 +73,7 @@ function SEO({description, lang, meta, title}) {
         },
         {
           property: `twitter:image`,
-          content: ``,
+          content: `https://raw.githubusercontent.com/fcrezza/portfolio-site/master/src/images/screenshot.png`,
         },
       ].concat(meta)}
     />
