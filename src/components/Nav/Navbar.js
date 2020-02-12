@@ -2,41 +2,32 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faSun, faMoon} from '@fortawesome/free-solid-svg-icons'
 import {faGithub, faTwitter} from '@fortawesome/free-brands-svg-icons'
 import Logo from './Logo'
-import Link from './Link'
+import {SocialLink} from './Link'
+import {NavButton} from './NavButton'
 import {SmallDevider} from '../Devider'
-import {getThemeValue, getThemeUpdater} from '../../utils/ThemeContext'
 import toRem from '../../utils/toRem'
-import color from '../../utils/colorSchemes'
-import mobile from '../../utils/mobile'
-import isLight from '../../utils/isLight'
+import colors from '../../utils/colorSchemes'
+import {mobile} from '../../utils/mediaQuery'
 import useClickToScroll from '../../utils/useClickToScroll'
 
 const Wrapper = styled.div`
-  background: ${({isScrolled, theme}) => {
-    if (isScrolled && isLight(theme)) {
-      return color.light.blue
-    } else if (isScrolled && !isLight(theme)) {
-      return color.dark.darkBlue
+  background: ${({isScrolled}) => {
+    if (isScrolled) {
+      return colors.darkPurple
     } else {
       return 'transparent'
     }
   }};
   padding: ${({isScrolled}) =>
     isScrolled ? `${toRem(8)} ${toRem(90)}` : `${toRem(25)} ${toRem(90)} 0`};
-  transition: background 0.4s;
   ${mobile({display: 'none'})}
 `
 
 const Left = styled.div`
   display: flex;
   align-items: center;
-
-  .logo {
-    margin-right: ${toRem(45)};
-  }
 `
 
 const Right = styled.div`
@@ -52,93 +43,62 @@ const StyledNavbar = styled.nav`
 `
 
 const Navbar = ({isScrolled}) => {
-  const theme = getThemeValue()
-  const changeTheme = getThemeUpdater()
-  const active = useClickToScroll()
-
+  const clickToScroll = useClickToScroll('.nav-btn')
+   
   return (
-    <Wrapper theme={theme} isScrolled={isScrolled}>
+    <Wrapper isScrolled={isScrolled}>
       <StyledNavbar>
         <Left>
           <Logo />
-          {/* eslint-disable-next-line */}
-          <Link
-            color={color.common.smoothWhite}
-            activeColor={color.common.white}
-            as="button"
-            type="navlink"
+          <NavButton
             data-name="home"
-            className="navlink"
-            active={active === 'home'}
+            className="nav-btn"
+            active={isScrolled < 600}
           >
             Home
-          </Link>
+          </NavButton>
           <SmallDevider />
-          {/* eslint-disable-next-line */}
-          <Link
-            color={color.common.smoothWhite}
-            activeColor={color.common.white}
-            as="button"
-            type="navlink"
+          <NavButton
             data-name="about"
-            className="navlink"
-            active={active === 'about'}
+            className="nav-btn"
+            active={isScrolled >= 600 && isScrolled < 1273}
           >
             About
-          </Link>
+          </NavButton>
           <SmallDevider />
-          {/* eslint-disable-next-line */}
-          <Link
-            color={color.common.smoothWhite}
-            activeColor={color.common.white}
-            as="button"
-            type="navlink"
+          <NavButton
             data-name="portfolio"
-            className="navlink"
-            active={active === 'portfolio'}
+            className="nav-btn"
+            active={isScrolled >= 1273 && isScrolled < 1629}
           >
             Portfolio
-          </Link>
+          </NavButton>
           <SmallDevider />
-          {/* eslint-disable-next-line */}
-          <Link
-            color={color.common.smoothWhite}
-            activeColor={color.common.white}
-            as="button"
-            type="navlink"
-            active={active === 'contact'}
-            className="navlink"
+          <NavButton
+            active={isScrolled >= 1629}
+            className="nav-btn"
             data-name="contact"
           >
             Contact
-          </Link>
+          </NavButton>
         </Left>
         <Right>
-          <Link
-            type="sociallink"
-            to="https://github.com/fcrezza/portfolio-site"
+          <SocialLink
+            href="https://github.com/fcrezza/portfolio-site"
           >
             <FontAwesomeIcon
               icon={faGithub}
               size="lg"
-              color={isLight(theme) ? color.dark.darkBlue : color.light.blue}
+              color={colors.smoothWhite}
             />
-          </Link>
-          <Link type="sociallink" to="https://twitter.com/fcrezza">
+          </SocialLink>
+          <SocialLink href="https://twitter.com/fcrezza">
             <FontAwesomeIcon
               icon={faTwitter}
               size="lg"
-              color={isLight(theme) ? color.dark.darkBlue : color.light.blue}
+              color={colors.smoothWhite}
             />
-          </Link>
-          {/* eslint-disable-next-line */}
-          <Link as="button" onClick={changeTheme}>
-            <FontAwesomeIcon
-              icon={isLight(theme) ? faMoon : faSun}
-              size="lg"
-              color={isLight(theme) ? color.dark.darkBlue : color.light.blue}
-            />
-          </Link>
+          </SocialLink>
         </Right>
       </StyledNavbar>
     </Wrapper>

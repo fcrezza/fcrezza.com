@@ -1,29 +1,28 @@
 import styled from 'styled-components'
 import toRem from '../utils/toRem'
-import color from '../utils/colorSchemes'
-import 'typeface-cuprum'
+import colors from '../utils/colorSchemes'
+import {mobile, phone} from '../utils/mediaQuery'
 
 const baseButton = styled.button`
-  background: ${({theme}) =>
-    theme === 'light' ? color.light.blue : color.dark.darkBlue};
+  background: ${colors.pink};
   border: none;
-  transition: all 0.4s;
   cursor: pointer;
-  color: ${color.common.smoothWhite};
-  font-weight: 600;
-  font-family: 'Cuprum', sans-serif;
+  color: ${colors.white};
+  font-weight: 700;
+  font-family: 'Source Sans Pro', sans-serif;
   font-size: ${toRem(23)};
+  outline: none;
 
   &:hover,
   &:focus {
-    outline: none;
-    opacity: 0.9;
+    background: ${colors.darkPink} 
   }
+  ${mobile({fontSize:toRem(21)})}
+  ${phone({fontSize:toRem(18)})}
 `
 
 export const InlineButton = styled(baseButton)`
   padding: ${toRem(13)};
-  font-size: ${toRem(26)};
 `
 
 export const BlockButton = styled(baseButton)`

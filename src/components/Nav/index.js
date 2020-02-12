@@ -10,7 +10,6 @@ const StyledNav = styled.div`
   left: 0;
   width: 100%;
   z-index: 2;
-  transition: position 0.8s;
 `
 const Nav = () => {
   const isScrolled = useScroll()

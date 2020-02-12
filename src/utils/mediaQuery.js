@@ -1,6 +1,6 @@
 import {css} from 'styled-components'
 
-const mobile = style =>
+export const mobile = style =>
   css`
     @media screen and (max-width: 768px) {
       ${{...style}}
@@ -13,5 +13,3 @@ export const phone = style =>
       ${{...style}}
     }
   `
-
-export default mobile

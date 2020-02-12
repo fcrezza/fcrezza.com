@@ -1,28 +1,24 @@
 import React from 'react'
 import styled from 'styled-components'
-import {getThemeValue} from '../utils/ThemeContext'
-import color from '../utils/colorSchemes'
+import colors from '../utils/colorSchemes'
 import toRem from '../utils/toRem'
-import isLight from '../utils/isLight'
 
 const FooterWrapper = styled.footer`
-	background: ${({theme}) =>
-		isLight(theme) ? color.light.blue : color.dark.darkBlue};
+	background: ${colors.purple};
 	padding: ${toRem(28)};
 	text-align: center;
-	color: ${color.common.smoothWhite};
+	color: ${colors.smoothWhite};
 	font-size: ${toRem(21)};
 	transition: background 0.4s;
 
 	a {
-		color: ${color.common.smoothWhite};
+		color: ${colors.smoothWhite};
 	}
 `
 
 const Footer = () => {
-	const theme = getThemeValue()
 	return (
-		<FooterWrapper theme={theme}>
+		<FooterWrapper>
 			&copy; 2020 <a href="/">Anang Fachreza</a> All rights reserved.
 		</FooterWrapper>
 	)

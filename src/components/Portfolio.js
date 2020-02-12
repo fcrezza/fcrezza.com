@@ -1,27 +1,26 @@
-import React, {useEffect, useRef} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faEdit} from '@fortawesome/free-solid-svg-icons'
+import {faArrowLeft, faArrowRight} from '@fortawesome/free-solid-svg-icons'
 import Swiper from 'swiper'
-import {getThemeValue} from '../utils/ThemeContext'
 import toRem from '../utils/toRem'
-import mobile, {phone} from '../utils/mobile'
-import isLight from '../utils/isLight'
-import color from '../utils/colorSchemes'
-import hero from '../images/hero.jpg'
+import {mobile, phone} from '../utils/mediaQuery'
+import colors from '../utils/colorSchemes'
+import hexToRGB from '../utils/hexToRGB'
+import projectPurple from '../images/project-purple.svg'
+import projectPink from '../images/project-pink.svg'
 import '../../node_modules/swiper/css/swiper.css'
 
 const Wrapper = styled.div`
-  padding: ${toRem(35)} ${toRem(90)};
-  background: ${({theme}) =>
-    isLight(theme) ? color.light.blue : color.dark.darkBlue};
+  padding: ${toRem(50)} ${toRem(90)};
+  background: ${colors.purple};
   transition: all 0.4s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: ${color.common.smoothWhite};
+  color: ${colors.smoothWhite};
   font-size: ${toRem(40)};
-  ${mobile({padding: `${toRem(30)} ${toRem(50)}`})}
+  ${mobile({padding: `${toRem(40)} ${toRem(50)}`})}
   ${phone({padding: `${toRem(30)} ${toRem(30)}`})}
 `
 
@@ -30,7 +29,8 @@ const Message = styled.div`
   text-align: center;
   font-style: italic;
   line-height: 1.3;
-  ${mobile({fontSize: toRem(34)})}
+  ${mobile({fontSize: toRem(32)})}
+  ${phone({fontSize: toRem(30)})}
 
   div {
     margin: ${toRem(10)} 0 0;
@@ -38,197 +38,307 @@ const Message = styled.div`
 `
 
 const PortfolioSection = styled.section`
-  background: ${({theme}) =>
-    isLight(theme) ? color.common.lightWhite : color.dark.dark};
-  padding: ${toRem(80)} ${toRem(90)};
+  background: ${colors.white};
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: ${toRem(80)} ${toRem(90)};
   ${mobile({padding: `${toRem(60)} ${toRem(50)}`})}
   ${phone({padding: `${toRem(50)} ${toRem(30)}`})}
 `
 
-const SliderContainer = styled.div`
+const SliderWrapper = styled.div`
+  position: relative;
   max-width: ${toRem(900)};
-  width: 100%;
   max-height: ${toRem(550)};
+  display: flex;
+
+  ${mobile({width: '85%'})}
+  ${phone({width: '75%'})}
 `
 
 const SliderItem = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
+  width: ${toRem(440)};
+  height: ${toRem(240)};
   overflow: hidden;
+  background: url(${projectPurple});
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  padding: ${toRem(30)};
 
-  &:hover, &:focus {
-    .background {
-      transform: scale(1.5);
-    }
 
-    &::before {
-      background: rgba(0,0,0,0.3);
-    }
+  &:nth-child(odd) {
+    background: url(${projectPink});
+    background-size: contain;
+    background-position: right bottom;
+    background-repeat: no-repeat;
+  }
+
+  &:hover :nth-child(odd)::before {
+    background: rgba(${hexToRGB(colors.pink)}, 0.8);
+  }
+
+  &:hover::before {
+    background: rgba(${hexToRGB(colors.purple)}, 0.8);
+  }
+
+  &:nth-child(odd)::before {
+    background: rgba(${hexToRGB(colors.pink)}, 0.9);
   }
 
   &::before {
+    transition: background 0.3s;
     content: '';
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    transition: background 0.4s;
-    z-index: 1;
-  }
-
-  .background {
-    display: block;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.4s;
+    background: rgba(${hexToRGB(colors.purple)}, 0.91);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 
   .content {
     position: absolute;
     z-index: 2;
-    padding: ${toRem(45)};
     top: 50%;
-    transform: translateY(-20%);
-  ${phone({padding: toRem(30), transform: 'translateY(-45%)'})}
+    transform: translateY(-40%);
+    ${phone({padding: 0, transform: 'translateY(-50%)'})}
   }
 
   .title {
-    margin: 0 0 ${toRem(18)};
-    color: ${color.common.smoothWhite};
-    font-size: ${toRem(45)};
-    ${phone({fontSize: toRem(32), margin: `0 0 ${toRem(14)}`})}
+    margin: 0 0 ${toRem(15)};
+    color: ${colors.white};
+    font-size: ${toRem(32)};
+    ${phone({fontSize: toRem(30), margin: `0 0 ${toRem(14)}`})}
   }
 
   .subtitle {
     margin: 0 0 ${toRem(20)};
-    color: ${color.common.lightWhite};
-    font-size: ${toRem(30)};
-    ${phone({fontSize: toRem(23), margin: `0 0 ${toRem(15)}`})}
+    color: ${colors.smoothWhite};
+    font-size: ${toRem(25)};
+    ${phone({fontSize: toRem(24), margin: `0 0 ${toRem(18)}`})}
   }
 
   .link {
     text-decoration: none;
-    display: inline-block;
-    padding: ${toRem(10)} ${toRem(20)};
     font-size: ${toRem(20)};
-    background: ${({theme}) =>
-      isLight(theme) ? color.light.blue : color.dark.darkBlue};
-    color: ${color.common.smoothWhite};
-    ${phone({fontSize: toRem(15), padding: `${toRem(6)} ${toRem(10)}`})}
+    color: ${colors.white};
+
+    span {
+      margin-left: ${toRem(5)};
+    }
+
+    &:hover {
+      text-decoration: underline;
+      span {
+        margin-left: ${toRem(10)};
+      }
+    }
+  }
+`
+
+const ArrowNav = styled.button`
+  background: transparent;
+  position: absolute;
+  width: ${toRem(35)};
+  height: ${toRem(35)};
+  border: ${({disabled}) =>
+    disabled ? `1px solid ${colors.smoothGrey}` : `1px solid ${colors.black}`};
+  border-radius: 50%;
+  padding: 0;
+  outline: none;
+  cursor: ${({disabled}) => (disabled ? 'default' : 'pointer')};
+
+  &.right {
+    top: 50%;
+    right: -${toRem(60)};
+  }
+
+  &.left {
+    top: 50%;
+    left: -${toRem(60)};
+  }
 `
 
 const Portfolio = () => {
-  const theme = getThemeValue()
-  const mySwiper = useRef()
-
-  const handleMouseEnter = () => {
-    mySwiper.current.autoplay.stop()
-  }
-
-  const handleMouseLeave = () => {
-    mySwiper.current.autoplay.start()
-  }
+  const swiperInit = useRef()
+  const [disabledNav, setDisabledNav] = useState({left: true, right: false})
 
   useEffect(() => {
-    mySwiper.current = new Swiper('.swiper-container', {
-      autoplay: {
-        disableOnInteraction: false,
-      },
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
+    swiperInit.current = new Swiper('.swiper-container', {
+      slidesPerView: window.innerWidth > 768 ? 2 : 1,
+      slidesPerGroup: window.innerWidth > 768 ? 2 : 1,
+      spaceBetween: 20,
+      navigation: {
+        prevEl: '.prev-btn',
+        nextEl: '.next-btn',
+      }
+    })
+    swiperInit.current.on('slideChange', () => {
+      if (swiperInit.current.isBeginning)
+        setDisabledNav({left: true, right: false})
+      else if (swiperInit.current.isEnd)
+        setDisabledNav({left: false, right: true})
+      else 
+       setDisabledNav({left: false, right: false})
     })
   }, [])
 
   return (
     <>
-      <Wrapper theme={theme}>
+      <Wrapper>
         <Message>
           I have worked on several projects including my personal project, this
           is my portfolio.
-          <div>
-            <FontAwesomeIcon
-              icon={faEdit}
-              size="sm"
-              color={color.common.smoothWhite}
-            />
-          </div>
         </Message>
       </Wrapper>
-      <PortfolioSection id="portfolio" theme={theme}>
-        <SliderContainer className="swiper-container">
-          <div className="swiper-wrapper">
-            <SliderItem
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              className="swiper-slide"
-              data-id="1"
-              theme={theme}
-            >
-              <img src={hero} alt="" className="background" />
-              <div className="content">
-                <h3 className="title">Congkir</h3>
-                <p className="subtitle">Check package shipping costs</p>
-                <a
-                  href="https://congkir.netlify.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="link"
-                >
-                  Visit
-                </a>
-              </div>
-            </SliderItem>
-            <SliderItem
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              className="swiper-slide"
-              data-id="2"
-              theme={theme}
-            >
-              <img src={hero} alt="" className="background" />
-              <div className="content">
-                <h3 className="title">Congkir</h3>
-                <p className="subtitle">Check package shipping costs</p>
-                <a
-                  href="https://congkir.netlify.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="link"
-                >
-                  Visit
-                </a>
-              </div>
-            </SliderItem>
-            <SliderItem
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              className="swiper-slide"
-              data-id="3"
-              theme={theme}
-            >
-              <img src={hero} alt="" className="background" />
-              <div className="content">
-                <h3 className="title">Congkir</h3>
-                <p className="subtitle">Check package shipping costs</p>
-                <a
-                  href="https://congkir.netlify.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="link"
-                >
-                  Visit
-                </a>
-              </div>
-            </SliderItem>
+      <PortfolioSection id="portfolio">
+        <SliderWrapper>
+          <div className="swiper-container">
+            <div className="swiper-wrapper">
+              <SliderItem className="swiper-slide">
+                <div className="content">
+                  <h3 className="title">Congkir</h3>
+                  <p className="subtitle">Check package shipping costs</p>
+                  <a
+                    href="https://congkir.netlify.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link"
+                  >
+                    Visit{' '}
+                    <span>
+                      <FontAwesomeIcon
+                        icon={faArrowRight}
+                        color={colors.white}
+                      />
+                    </span>
+                  </a>
+                </div>
+              </SliderItem>
+              <SliderItem className="swiper-slide">
+                <div className="content">
+                  <h3 className="title">Congkir</h3>
+                  <p className="subtitle">Check package shipping costs</p>
+                  <a
+                    href="https://congkir.netlify.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link"
+                  >
+                    Visit{' '}
+                    <span>
+                      <FontAwesomeIcon
+                        icon={faArrowRight}
+                        color={colors.white}
+                      />
+                    </span>
+                  </a>
+                </div>
+              </SliderItem>
+              <SliderItem className="swiper-slide">
+                <div className="content">
+                  <h3 className="title">Congkir</h3>
+                  <p className="subtitle">Check package shipping costs</p>
+                  <a
+                    href="https://congkir.netlify.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link"
+                  >
+                    Visit{' '}
+                    <span>
+                      <FontAwesomeIcon
+                        icon={faArrowRight}
+                        color={colors.white}
+                      />
+                    </span>
+                  </a>
+                </div>
+              </SliderItem>
+              <SliderItem className="swiper-slide">
+                <div className="content">
+                  <h3 className="title">Congkir</h3>
+                  <p className="subtitle">Check package shipping costs</p>
+                  <a
+                    href="https://congkir.netlify.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link"
+                  >
+                    Visit{' '}
+                    <span>
+                      <FontAwesomeIcon
+                        icon={faArrowRight}
+                        color={colors.white}
+                      />
+                    </span>
+                  </a>
+                </div>
+              </SliderItem>
+              <SliderItem className="swiper-slide">
+                <div className="content">
+                  <h3 className="title">Congkir</h3>
+                  <p className="subtitle">Check package shipping costs</p>
+                  <a
+                    href="https://congkir.netlify.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link"
+                  >
+                    Visit{' '}
+                    <span>
+                      <FontAwesomeIcon
+                        icon={faArrowRight}
+                        color={colors.white}
+                      />
+                    </span>
+                  </a>
+                </div>
+              </SliderItem>
+              <SliderItem className="swiper-slide">
+                <div className="content">
+                  <h3 className="title">Congkir</h3>
+                  <p className="subtitle">Check package shipping costs</p>
+                  <a
+                    href="https://congkir.netlify.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link"
+                  >
+                    Visit{' '}
+                    <span>
+                      <FontAwesomeIcon
+                        icon={faArrowRight}
+                        color={colors.white}
+                      />
+                    </span>
+                  </a>
+                </div>
+              </SliderItem>
+            </div>
           </div>
-          <div className="swiper-pagination" />
-        </SliderContainer>
+          <ArrowNav
+            className="prev-btn left"
+            disabled={disabledNav.left}
+            
+          >
+            <FontAwesomeIcon
+              icon={faArrowLeft}
+              color={disabledNav.left ? colors.smoothGrey : colors.black}
+            />
+          </ArrowNav>
+          <ArrowNav
+            className="next-btn right"
+            disabled={disabledNav.right}
+          >
+            <FontAwesomeIcon
+              icon={faArrowRight}
+              color={disabledNav.right ? colors.smoothGrey : colors.black}
+            />
+          </ArrowNav>
+        </SliderWrapper>
       </PortfolioSection>
     </>
   )

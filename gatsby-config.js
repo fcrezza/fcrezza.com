@@ -24,10 +24,10 @@ module.exports = {
         name: `Portfolio Site`,
         short_name: `Portfolio Site`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#574B90`,
+        theme_color: `#574B90`,
         display: `minimal-ui`,
-        icon: `src/images/logo.svg`, // This path is relative to the root of the site.
+        icon: `src/images/fav.svg`,
       },
     },
   ],

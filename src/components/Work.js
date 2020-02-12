@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import ReactTooltip from 'react-tooltip'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {
   faJs,
@@ -9,16 +8,12 @@ import {
   faReact,
 } from '@fortawesome/free-brands-svg-icons'
 import {BigDevider} from './Devider'
-import {getThemeValue} from '../utils/ThemeContext'
-import color from '../utils/colorSchemes'
+import colors from '../utils/colorSchemes'
 import toRem from '../utils/toRem'
-import mobile, {phone} from '../utils/mobile'
-import isLight from '../utils/isLight'
+import {mobile, phone} from '../utils/mediaQuery'
 
 const WorkSection = styled.section`
-  background: ${({theme}) =>
-    isLight(theme) ? color.common.lightWhite : color.dark.dark};
-  transition: all 0.4s ease;
+  background: ${colors.white};
   padding: ${toRem(20)} ${toRem(90)};
   ${mobile({padding: `${toRem(20)} ${toRem(50)}`})}
   ${phone({padding: `${toRem(20)} ${toRem(30)}`})}
@@ -33,18 +28,11 @@ const WorkWrapper = styled.div`
 `
 
 const Message = styled.p`
-  color: ${({theme}) =>
-    isLight(theme) ? color.light.smoothDark : color.dark.smoothWhite};
+  color: ${colors.smoothBlack};
   font-size: ${toRem(29)};
   margin-right: ${toRem(110)};
   ${mobile({fontSize: toRem(25), marginRight: toRem(70)})}
   ${phone({marginRight: toRem(50)})}
-`
-
-const Stack = styled.div`
-  svg {
-    transition: color 0.4s;
-  }
 `
 
 const StackWrapper = styled.div`
@@ -55,86 +43,42 @@ const StackWrapper = styled.div`
 `
 
 const Work = () => {
-  const [id, setId] = useState('')
-  const theme = getThemeValue()
-  const [stackColor, setStackColor] = useState({
-    color: color.light.grey,
-    active: color.light.strongGrey,
-  })
-
-  useEffect(() => {
-    if (isLight(theme)) {
-      setStackColor({color: color.light.grey, active: color.light.strongGrey})
-    } else {
-      setStackColor({
-        color: color.dark.strongGrey,
-        active: color.dark.smoothWhite,
-      })
-    }
-  }, [theme])
-
-  useEffect(() => {
-    const handleFocus = ({target}) => {
-      setId(target.dataset.id)
-    }
-
-    const stacks = document.querySelectorAll('.stack')
-    stacks.forEach(stack => stack.addEventListener('mouseenter', handleFocus))
-    stacks.forEach(stack =>
-      stack.addEventListener('mouseleave', () => setId('')),
-    )
-
-    return () => {
-      stacks.forEach(stack =>
-        stack.removeEventListener('mouseenter', handleFocus),
-      )
-      stacks.forEach(stack =>
-        stack.removeEventListener('mouseleave', () => setId('')),
-      )
-    }
-  }, [])
-
   return (
-    <WorkSection theme={theme}>
+    <WorkSection>
       <WorkWrapper>
-        <Message theme={theme}>Usually I work using</Message>
+        <Message>Usually I work using</Message>
         <StackWrapper>
-          <ReactTooltip
-            place="bottom"
-            type={isLight(theme) ? 'dark' : 'light'}
-            effect="solid"
-          />
-          <Stack data-tip="Html5" className="stack" data-id="html">
+          <div>
             <FontAwesomeIcon
               icon={faHtml5}
               size="4x"
-              color={id === 'html' ? stackColor.active : stackColor.color}
+              color={colors.smoothGrey}
             />
-          </Stack>
-          <BigDevider theme={theme} />
-          <Stack data-tip="Css3" className="stack" data-id="css">
+          </div>
+          <BigDevider />
+          <div>
             <FontAwesomeIcon
               icon={faCss3Alt}
               size="4x"
-              color={id === 'css' ? stackColor.active : stackColor.color}
+              color={colors.smoothGrey}
             />
-          </Stack>
-          <BigDevider theme={theme} />
-          <Stack data-tip="Javascript" className="stack" data-id="js">
+          </div>
+          <BigDevider />
+          <div>
             <FontAwesomeIcon
               icon={faJs}
               size="4x"
-              color={id === 'js' ? stackColor.active : stackColor.color}
+              color={colors.smoothGrey}
             />
-          </Stack>
-          <BigDevider theme={theme} />
-          <Stack data-tip="Reactjs" className="stack" data-id="react">
+          </div>
+          <BigDevider />
+          <div>
             <FontAwesomeIcon
               icon={faReact}
               size="4x"
-              color={id === 'react' ? stackColor.active : stackColor.color}
+              color={colors.smoothGrey}
             />
-          </Stack>
+          </div>
         </StackWrapper>
       </WorkWrapper>
     </WorkSection>

@@ -27,7 +27,7 @@
     "react-tooltip": "^3.11.2",
     "styled-components": "^5.0.0",
     "swiper": "^5.3.0",
-    "typeface-cuprum": "0.0.72",
+    "typeface-source-sans-pro": "0.0.75",
     "yup": "^0.28.1"
   },
   "devDependencies": {

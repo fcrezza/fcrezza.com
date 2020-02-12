@@ -1,12 +1,18 @@
 import React, {useEffect, useRef} from 'react'
 import {createPortal} from 'react-dom'
 import PropTypes from 'prop-types'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faTimes} from '@fortawesome/free-solid-svg-icons'
-import styled from 'styled-components'
-import color from '../utils/colorSchemes'
+import styled, {createGlobalStyle} from 'styled-components'
+import colors from '../utils/colorSchemes'
 import toRem from '../utils/toRem'
-import {phone} from '../utils/mobile'
+import isSSR from '../utils/isSSR'
+import {phone} from '../utils/mediaQuery'
+import hexToRGB from '../utils/hexToRGB'
+
+const Global = createGlobalStyle`
+  body {
+    overflow: ${open => (open ? 'hidden' : 'unset')};
+  }
+`
 
 const ModalWrapper = styled.div`
   position: fixed;
@@ -14,7 +20,10 @@ const ModalWrapper = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: ${({type}) =>
+    type === 'success'
+      ? `rgba(${hexToRGB(colors.purple)},0.5)`
+      : `rgba(${hexToRGB(colors.pink)},0.5)`};
   z-index: 2;
 
   .content {
@@ -25,30 +34,39 @@ const ModalWrapper = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     padding: ${toRem(25)};
-    background: ${color.common.smoothWhite};
+    background: ${colors.smoothWhite};
   }
+`
 
-  .close-btn {
-    border: 0;
-    background: transparent;
-    padding: 0;
-    position: absolute;
-    top: ${toRem(10)};
-    right: ${toRem(15)};
-    outline: none;
-    cursor: pointer;
+const CloseBtn = styled.button`
+  border: 0;
+  background: transparent;
+  padding: ${toRem(8)} ${toRem(12)};
+  position: absolute;
+  font-size: ${toRem(18)};
+  bottom: ${toRem(20)};
+  right: ${toRem(25)};
+  outline: none;
+  cursor: pointer;
+  color: ${({color}) => (color === 'success' ? colors.purple : colors.pink)};
+
+  &:hover {
+    background: rgba(${hexToRGB(colors.smoothGrey)}, 0.5);
   }
 `
 
 const MessageWrapper = styled.div`
   .title {
-    color: ${({type}) => (type === 'success' ? color.light.blue : '#F5587B')};
-    margin: ${toRem(30)} 0 ${toRem(20)};
+    color: ${({type}) => (type === 'success' ? colors.purple : colors.pink)};
+    font-weight: 700;
+    font-size: ${toRem(35)};
+    margin: ${toRem(10)} 0 ${toRem(20)};
     ${phone({fontSize: toRem(30)})}
   }
 
   .subtitle {
-    color: ${color.light.dark};
+    color: ${colors.smoothBlack};
+    font-size: ${toRem(25)};
     margin: 0 0 ${toRem(25)};
     font-size: ${toRem(25)};
     ${phone({fontSize: toRem(20)})}
@@ -58,7 +76,7 @@ const MessageWrapper = styled.div`
 const Message = ({type}) => {
   if (type === 'success') {
     return (
-      <MessageWrapper type={type}>
+      <MessageWrapper type="success">
         <h1 className="title">Yeay, your message was sent successfully</h1>
         <p className="subtitle">
           Don&apos;t forget to check your email later when I reply your message.
@@ -67,7 +85,7 @@ const Message = ({type}) => {
     )
   } else {
     return (
-      <MessageWrapper type={type}>
+      <MessageWrapper type="error">
         <h1 className="title">Whoops, something went wrong</h1>
         <p className="subtitle">
           Make sure you have a stable internet connection.
@@ -81,16 +99,17 @@ Message.propTypes = {
   type: PropTypes.string.isRequired,
 }
 
-const isSSR = () => typeof window === 'undefined' || !window.document
 let modalContainer
 let div
 
 if (!isSSR()) {
-  modalContainer = document.getElementById('modal')
+  modalContainer = document.createElement('div')
+  modalContainer.id = 'modal-container'
+  document.body.appendChild(modalContainer)
   div = document.createElement('div')
 }
 
-const Modal = ({type, toggleModal}) => {
+const Modal = ({type, toggleModal, open}) => {
   const el = useRef()
 
   const handleClickOutside = ({target}) => {
@@ -114,24 +133,28 @@ const Modal = ({type, toggleModal}) => {
   }, [])
 
   return createPortal(
-    <ModalWrapper
-      ref={ref => {
-        el.current = ref
-      }}
-    >
-      <div className="content">
-        {/* eslint-disable-next-line */}
-        <button className="close-btn" onClick={toggleModal}>
-          <FontAwesomeIcon icon={faTimes} size="2x" />
-        </button>
-        <Message type={type} />
-      </div>
-    </ModalWrapper>,
+    <>
+      <Global open={open} />
+      <ModalWrapper
+        type={type}
+        ref={ref => {
+          el.current = ref
+        }}
+      >
+        <div className="content">
+          <Message type={type} />
+          <CloseBtn color={type} onClick={toggleModal}>
+            OK
+          </CloseBtn>
+        </div>
+      </ModalWrapper>
+    </>,
     div,
   )
 }
 
 Modal.propTypes = {
+  open: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
   toggleModal: PropTypes.func.isRequired,
 }

@@ -2,65 +2,56 @@ import React from 'react'
 import styled from 'styled-components'
 import {useStaticQuery, graphql} from 'gatsby'
 import {InlineButton} from './Button'
-import {getThemeValue} from '../utils/ThemeContext'
 import toRem from '../utils/toRem'
-import color from '../utils/colorSchemes'
-import mobile, {phone} from '../utils/mobile'
-import hero from '../images/hero.jpg'
+import colors from '../utils/colorSchemes'
+import {mobile, phone} from '../utils/mediaQuery'
+import useClickToScroll from '../utils/useClickToScroll'
+import batthern from '../images/batthern.png'
 
 const StyledShowcase = styled.section`
-  background: url(${hero});
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: url(${batthern});
+  background-color: ${colors.purple};
   height: ${toRem(608)};
-  background-position: center;
   padding: 0 ${toRem(90)};
   display: flex;
   align-items: center;
-  position: relative;
+  justify-content: center;
   ${mobile({padding: `0 ${toRem(50)}`})}
   ${phone({padding: `0 ${toRem(30)}`})}
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.4);
-  }
 `
 
 const Wrapper = styled.div`
   display: flex;
-  height: ${toRem(300)};
   flex-direction: column;
   justify-content: space-between;
+  height: ${toRem(310)};
+  align-items: center;
   margin-top: ${toRem(40)};
   z-index: 1;
 
   ${mobile({height: toRem(270)})}
-  ${phone({height: toRem(300), textAlign: 'center'})}
+  ${phone({height: toRem(280), textAlign: 'center'})}
 `
 
 const WelcomeMsg = styled.h3`
-  color: ${color.common.white};
+  color: ${colors.white};
   font-size: ${toRem(45)};
   margin: 0;
+  font-weight: 600;
   ${mobile({fontSize: toRem(35)})}
   ${phone({fontSize: toRem(30)})}
 `
 
 const Title = styled.h1`
-  color: ${color.common.white};
+  color: ${colors.white};
   font-size: ${toRem(60)};
   margin: 0;
+  font-weight: 700;
   ${mobile({fontSize: toRem(50)})}
-  ${phone({fontSize: toRem(45)})}
+  ${phone({fontSize: toRem(40)})}
 `
 const Subtitle = styled.p`
-  color: ${color.common.smoothWhite};
+  color: ${colors.smoothWhite};
   font-size: ${toRem(38)};
   margin: 0;
   ${mobile({fontSize: toRem(30)})}
@@ -68,7 +59,7 @@ const Subtitle = styled.p`
 `
 
 const Showcase = () => {
-  const theme = getThemeValue()
+  const clickToScroll = useClickToScroll('.to-contact')
   const {site} = useStaticQuery(
     graphql`
       query {
@@ -82,7 +73,6 @@ const Showcase = () => {
       }
     `,
   )
-
   return (
     <StyledShowcase id="home">
       <Wrapper>
@@ -90,7 +80,7 @@ const Showcase = () => {
         <Title>{site.siteMetadata.title}</Title>
         <Subtitle>{site.siteMetadata.subtitle}</Subtitle>
         <div>
-          <InlineButton className="navlink" data-name="contact" theme={theme}>
+          <InlineButton className="to-contact" data-name="contact">
             Send a message
           </InlineButton>
         </div>
