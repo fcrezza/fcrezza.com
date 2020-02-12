@@ -74,7 +74,7 @@ const Navigation = styled.nav`
   overflow-y: auto;
   display: none;
   background: ${colors.smoothWhite};
-  box-shadow: 0 0 ${toRem(30)} rgba(${hexToRGB(colors.black)},0.5);
+  box-shadow: 0 0 ${toRem(30)} rgba(${hexToRGB(colors.black)}, 0.5);
   ${mobile({display: 'flex'})}
   ${phone({left: 30, right: 30})}
 
@@ -88,14 +88,14 @@ const Navigation = styled.nav`
 
 const MobileNavbar = ({isScrolled}) => {
   const [open, setOpen] = useState(false)
-  const active = useClickToScroll('.nav-btn')  
+  const active = useClickToScroll('.nav-btn')
 
   return (
     <>
       <Wrapper isScrolled={isScrolled}>
         <StyledMobileNavbar>
           <Logo />
-          <Burger onClick={() => setOpen(!open)}>
+          <Burger aria-label="hamburger-menu" onClick={() => setOpen(!open)}>
             <div />
             <div />
             <div />
@@ -105,31 +105,31 @@ const MobileNavbar = ({isScrolled}) => {
       <Navigation open={open} isScrolled={isScrolled}>
         <NavButtonBlock
           onClick={() => setOpen(!open)}
-          active={active === "home"}
+          active={active === 'home'}
           data-name="home"
           className="nav-btn"
         >
           Home
         </NavButtonBlock>
         <NavButtonBlock
-        onClick={() => setOpen(!open)}
-          active={active === "about"}
+          onClick={() => setOpen(!open)}
+          active={active === 'about'}
           data-name="about"
           className="nav-btn"
         >
           About
         </NavButtonBlock>
         <NavButtonBlock
-        onClick={() => setOpen(!open)}
-          active={active === "portfolio"}
+          onClick={() => setOpen(!open)}
+          active={active === 'portfolio'}
           data-name="portfolio"
           className="nav-btn"
         >
           Portfolio
         </NavButtonBlock>
         <NavButtonBlock
-        onClick={() => setOpen(!open)}
-          active={active === "contact"}
+          onClick={() => setOpen(!open)}
+          active={active === 'contact'}
           data-name="contact"
           className="nav-btn"
         >
@@ -138,19 +138,15 @@ const MobileNavbar = ({isScrolled}) => {
         <div>
           <SocialLink
             href="https://github.com/fcrezza/portfolio-site"
+            rel="noopener noreferrer"
           >
-            <FontAwesomeIcon
-              icon={faGithub}
-              size="lg"
-              color={colors.purple}
-            />
+            <FontAwesomeIcon icon={faGithub} size="lg" color={colors.purple} />
           </SocialLink>
-          <SocialLink href="https://twitter.com/fcrezza">
-            <FontAwesomeIcon
-              icon={faTwitter}
-              size="lg"
-              color={colors.purple}
-            />
+          <SocialLink
+            href="https://twitter.com/fcrezza"
+            rel="noopener noreferrer"
+          >
+            <FontAwesomeIcon icon={faTwitter} size="lg" color={colors.purple} />
           </SocialLink>
         </div>
       </Navigation>

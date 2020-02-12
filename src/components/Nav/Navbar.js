@@ -44,7 +44,7 @@ const StyledNavbar = styled.nav`
 
 const Navbar = ({isScrolled}) => {
   const active = useClickToScroll('.nav-btn')
-  
+
   return (
     <Wrapper isScrolled={isScrolled}>
       <StyledNavbar>
@@ -53,7 +53,7 @@ const Navbar = ({isScrolled}) => {
           <NavButton
             data-name="home"
             className="nav-btn"
-            active={active === "home"}
+            active={active === 'home'}
           >
             Home
           </NavButton>
@@ -61,7 +61,7 @@ const Navbar = ({isScrolled}) => {
           <NavButton
             data-name="about"
             className="nav-btn"
-            active={active === "about"}
+            active={active === 'about'}
           >
             About
           </NavButton>
@@ -69,13 +69,13 @@ const Navbar = ({isScrolled}) => {
           <NavButton
             data-name="portfolio"
             className="nav-btn"
-            active={active === "portfolio"}
+            active={active === 'portfolio'}
           >
             Portfolio
           </NavButton>
           <SmallDevider />
           <NavButton
-            active={active === "contact"}
+            active={active === 'contact'}
             className="nav-btn"
             data-name="contact"
           >
@@ -85,6 +85,7 @@ const Navbar = ({isScrolled}) => {
         <Right>
           <SocialLink
             href="https://github.com/fcrezza/portfolio-site"
+            rel="noopener noreferrer"
           >
             <FontAwesomeIcon
               icon={faGithub}
@@ -92,7 +93,10 @@ const Navbar = ({isScrolled}) => {
               color={colors.smoothWhite}
             />
           </SocialLink>
-          <SocialLink href="https://twitter.com/fcrezza">
+          <SocialLink
+            href="https://twitter.com/fcrezza"
+            rel="noopener noreferrer"
+          >
             <FontAwesomeIcon
               icon={faTwitter}
               size="lg"
