@@ -21,4 +21,4 @@ or
     $ npm run develop
 
 
-#### This project use [gatsby](htttps://gatsbyjs.org)  to develop this site 
+#### This project use [gatsby](https://gatsbyjs.org)  to develop this site 
