@@ -1,78 +1,55 @@
 {
-  "name": "portfolio-site",
-  "private": true,
-  "description": "Anang Fachreza portfolio site",
-  "version": "0.1.0",
-  "author": "Anang Fachreza <fachrezanang@gmail.com>",
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.26",
-    "@fortawesome/free-brands-svg-icons": "^5.12.0",
-    "@fortawesome/free-solid-svg-icons": "^5.12.0",
-    "@fortawesome/react-fontawesome": "^0.1.8",
-    "axios": "^0.19.2",
-    "formik": "^2.1.3",
-    "gatsby": "^2.18.12",
-    "gatsby-plugin-manifest": "^2.2.38",
-    "gatsby-plugin-react-helmet": "^3.1.16",
-    "gatsby-plugin-styled-components": "^3.1.18",
-    "prop-types": "^15.7.2",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-helmet": "^5.2.1",
-    "styled-components": "^5.0.0",
-    "swiper": "^5.3.0",
-    "typeface-source-sans-pro": "0.0.75",
-    "yup": "^0.28.1"
-  },
-  "devDependencies": {
-    "@fcrezza/prettier-config": "^1.0.1",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-import": "^2.20.0",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.2",
-    "eslint-plugin-react": "^7.18.0",
-    "eslint-plugin-react-hooks": "^1.7.0",
-    "husky": "^4.2.0",
-    "lint-staged": "^10.0.2",
-    "prettier": "^1.19.1"
-  },
-  "keywords": [
-    "portfolio",
-    "anang fachreza",
-    "fcrezza",
-    "gatsby",
-    "single page application"
-  ],
-  "license": "MIT",
-  "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "start": "npm run develop",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "format": "prettier --write 'src/**/*.js'",
-    "lint": "eslint 'src/**/*.js' --fix",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/fcrezza/portfolio-site"
-  },
-  "bugs": {
-    "url": "https://github.com/fcrezza/portfolio-site/issues"
-  },
-  "prettier": "@fcrezza/prettier-config",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.js": [
-      "eslint --fix",
-      "prettier --write"
-    ]
-  }
+	"name": "fcrezza.com",
+	"private": true,
+	"description": "Anang Fachreza personal site",
+	"version": "0.1.0",
+	"author": "Anang Fachreza <fachrezanang@gmail.com>",
+	"dependencies": {
+		"gatsby": "^2.18.12",
+		"gatsby-plugin-manifest": "^2.2.38",
+		"gatsby-plugin-react-helmet": "^3.1.16",
+		"normalize.css": "^8.0.1",
+		"react": "^16.12.0",
+		"react-dom": "^16.12.0",
+		"react-helmet": "^5.2.1",
+		"react-icons": "^3.10.0",
+		"typeface-poppins": "0.0.72"
+	},
+	"devDependencies": {
+		"husky": "^4.2.0",
+		"prettier": "^1.19.1"
+	},
+	"keywords": [
+		"personal site",
+		"anang fachreza",
+		"fcrezza",
+		"gatsby",
+		"single page application"
+	],
+	"license": "MIT",
+	"scripts": {
+		"build": "gatsby build",
+		"develop": "gatsby develop",
+		"start": "npm run develop",
+		"serve": "gatsby serve",
+		"clean": "gatsby clean",
+		"format": "prettier --write '**/*.{js, css}'"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/fcrezza/portfolio-site"
+	},
+	"bugs": {
+		"url": "https://github.com/fcrezza/portfolio-site/issues"
+	},
+	"prettier": {
+		"semi": false,
+		"singleQuote": true,
+		"bracketSpacing": false
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "npm run format"
+		}
+	}
 }
