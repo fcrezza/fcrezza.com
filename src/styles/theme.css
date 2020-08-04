@@ -1,10 +1,11 @@
 :root {
 	--font: 'Poppins', sans-serif;
 	--white: #ffffff;
-	--grey: #fdfdfd;
+	--gray: #fdfdfd;
 	--purple-100: #eae8ee;
 	--purple-200: #cabbe9;
-	--purple-300: #574b90;
+	--purple-300: #caa5f1;
+	--purple-400: #574b90;
 	--black-100: #444;
 	--black-200: #222;
 }

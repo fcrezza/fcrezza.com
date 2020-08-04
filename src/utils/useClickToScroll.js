@@ -12,13 +12,13 @@ const ClickToScroll = classname => {
 				if (isIE11) {
 					window.scrollTo(
 						0,
-						document.querySelector(`#${link.dataset.name}`).offsetTop,
+						document.querySelector(`#${link.dataset.name}`).offsetTop
 					)
 				} else {
 					window.scroll({
 						behavior: 'smooth',
 						left: 0,
-						top: document.querySelector(`#${link.dataset.name}`).offsetTop - 60,
+						top: document.querySelector(`#${link.dataset.name}`).offsetTop - 60
 					})
 				}
 			})
@@ -31,14 +31,14 @@ const ClickToScroll = classname => {
 					if (isIE11) {
 						window.scrollTo(
 							0,
-							document.querySelector(`#${link.dataset.name}`).offsetTop,
+							document.querySelector(`#${link.dataset.name}`).offsetTop
 						)
 					} else {
 						window.scroll({
 							behavior: 'smooth',
 							left: 0,
 							top:
-								document.querySelector(`#${link.dataset.name}`).offsetTop - 60,
+								document.querySelector(`#${link.dataset.name}`).offsetTop - 60
 						})
 					}
 				})

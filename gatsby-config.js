@@ -1,7 +1,7 @@
 module.exports = {
 	siteMetadata: {
 		title: `Anang Fachreza Personal Site`,
-		description: `Anang Fachreza Personal Site`,
+		description: `A frontend web developer - who build UX rich, accessible & performant website `,
 		author: `Anang Fachreza`
 	},
 	plugins: [
@@ -9,13 +9,13 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-manifest`,
 			options: {
-				name: `Portfolio Site`,
-				short_name: `Portfolio Site`,
+				name: `fcrezza.com`,
+				short_name: `fcrezza.com`,
 				start_url: `/`,
 				background_color: `#574B90`,
 				theme_color: `#574B90`,
 				display: `minimal-ui`,
-				icon: `src/images/fav.svg`
+				icon: `src/images/me.jpg`
 			}
 		}
 	]

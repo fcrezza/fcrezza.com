@@ -1,5 +1,15 @@
 @import 'theme.css';
 
 * {
+	box-sizing: border-box;
 	font-family: var(--font);
+}
+
+*::selection {
+	color: var(--white);
+	background: var(--purple-400);
+}
+
+body {
+	background: var(--gray);
 }

@@ -1,12 +1,14 @@
 import React from 'react'
 
-import Button from '../components/Button'
+import Head from '../components/Head'
+import Header from '../components/Header'
+
 function index() {
 	return (
-		<div>
-			<h1>hello landing page</h1>
-			<Button>Contact me</Button>
-		</div>
+		<>
+			<Head />
+			<Header />
+		</>
 	)
 }
 
