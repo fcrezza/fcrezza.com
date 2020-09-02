@@ -1,8 +1,23 @@
 .headerContainer {
 	height: 100vh;
-	background: var(--purple-100);
+	background: var(--purple-100); /* fallback for old browsers */
+	background: -webkit-linear-gradient(
+		var(--purple-100),
+		var(--white)
+	); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(
+		var(--purple-100),
+		var(--white)
+	); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 	position: relative;
 	padding: 2rem 4rem;
+}
+
+.headerContainer > button:first-child {
+	position: absolute;
+	right: 4rem;
+	top: 2rem;
 }
 
 .headerContent {
@@ -22,8 +37,8 @@
 	border-radius: 50%;
 	padding: 0.5rem;
 	overflow: hidden;
-	width: 110px;
-	height: 110px;
+	width: 120px;
+	height: 120px;
 }
 
 .avatarImg {

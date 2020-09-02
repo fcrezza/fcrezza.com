@@ -1,7 +1,7 @@
 import React from 'react'
 import {useStaticQuery, graphql} from 'gatsby'
 
-import Button from '../Button'
+import Button from '../../shared/Button'
 import {GithubLink, TwitterLink, LinkedinLink, CodewarsLink} from '../Social'
 import styles from './header.module.css'
 
@@ -21,6 +21,7 @@ function Header() {
 
 	return (
 		<header className={styles.headerContainer}>
+			<Button>Download my CV</Button>
 			<div className={styles.headerContent}>
 				<div className={styles.avatarContainer}>
 					<div className={styles.avatarImg}></div>
