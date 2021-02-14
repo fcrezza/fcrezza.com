@@ -1,11 +1,11 @@
 import React from 'react'
 
-export function Sun({width = 30, height = 30, fill = '#fff'}) {
+export function Sun({width = 35, height = 35, fill = '#fff'}) {
   return (
     <svg
       width={width}
       height={height}
-      viewBox="0 0 32 32"
+      viewBox={`0 0 35 35`}
       fill={fill}
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -37,12 +37,12 @@ export function Sun({width = 30, height = 30, fill = '#fff'}) {
   )
 }
 
-export function Moon({width = 30, height = 30, fill = '#fff'}) {
+export function Moon({width = 35, height = 35, fill = '#fff'}) {
   return (
     <svg
       width={width}
       height={height}
-      viewBox="0 0 35 35"
+      viewBox={`0 0 35 35`}
       fill={fill}
       xmlns="http://www.w3.org/2000/svg"
     >

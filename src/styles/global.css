@@ -1,0 +1,22 @@
+:root {
+  --primary-100: #333;
+  --primary-50: #555;
+  --secondary-100: #fff;
+  --secondary-50: #eeeeee;
+}
+
+:root.dark {
+  --primary-100: #fff;
+  --primary-50: #eeeeee;
+  --secondary-100: #333;
+  --secondary-50: #555;
+}
+
+* {
+  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--secondary-100);
+}
