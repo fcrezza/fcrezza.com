@@ -22,6 +22,7 @@ function ButtonMode() {
   return (
     <div className={styles.buttonModeContainer}>
       <button
+        aria-label="light mode"
         className={classnames(styles.buttonModeButton, {
           [styles.buttonModeActive]: activeMode === 'light',
         })}
@@ -30,6 +31,7 @@ function ButtonMode() {
         <SunIcon width={26} fill={activeMode === 'light' ? '#fff' : '#333'} />
       </button>
       <button
+        aria-label="dark mode"
         className={classnames(styles.buttonModeButton, {
           [styles.buttonModeActive]: activeMode === 'dark',
         })}

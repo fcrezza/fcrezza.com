@@ -9,6 +9,7 @@ const defaultDescription = 'Anang Fachreza Personal Website'
 function Head({title = defaultTitle, description = defaultDescription}) {
   return (
     <Helmet>
+      <html lang="id" />
       <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />
