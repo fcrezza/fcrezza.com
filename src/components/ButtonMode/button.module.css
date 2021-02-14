@@ -1,0 +1,22 @@
+.buttonModeContainer {
+}
+
+.buttonModeButton {
+  padding: 0;
+  border: 1px solid var(--primary-100);
+  background-color: var(--secondary-100);
+  display: inline-block;
+  width: 60px;
+}
+
+.buttonModeButton:first-child {
+  border-radius: 20px 0 0 20px;
+}
+
+.buttonModeButton:nth-child(2) {
+  border-radius: 0 20px 20px 0;
+}
+
+.buttonModeActive {
+  background-color: var(--primary-100);
+}

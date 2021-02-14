@@ -1,0 +1,15 @@
+:root {
+  --primary-100: #333;
+  --primary-50: #555;
+  --secondary-100: #fff;
+  --secondary-50: #f6f6f6;
+}
+
+* {
+  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #fff;
+}

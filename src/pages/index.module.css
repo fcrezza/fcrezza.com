@@ -1,0 +1,53 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.buttonModeContainer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 2rem 0;
+}
+
+.header {
+  text-align: center;
+  margin: 70px 0 100px;
+}
+
+.headerTitle {
+  font-size: 3rem;
+  margin: 0 0 2rem;
+  color: var(--primary-100);
+}
+
+.headerDescription {
+  font-size: 1.2rem;
+  margin: 0;
+  color: var(--primary-50);
+}
+
+.aboutText {
+  color: var(--primary-50);
+  line-height: 30px;
+  font-size: 1rem;
+}
+
+.comingSoonText {
+  font-size: 1rem;
+  color: var(--primary-50);
+}
+
+.socialMediaText {
+  margin: 0 0 1.2rem;
+  color: var(--primary-50);
+  font-size: 1rem;
+}
+
+.socialMediaGroup {
+  margin: 0;
+  color: var(--primary-50);
+}
+
+.socialMediaItem:not(:last-child) {
+  margin-bottom: 1.2rem;
+}

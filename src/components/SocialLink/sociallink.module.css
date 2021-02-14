@@ -1,0 +1,8 @@
+.socialLink {
+  color: var(--primary-50);
+}
+
+.socialLink:hover,
+.socialLink:focus {
+  color: var(--primary-100);
+}
