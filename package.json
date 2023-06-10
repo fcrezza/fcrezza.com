@@ -7,7 +7,7 @@
   "dependencies": {
     "@fontsource/open-sans": "^4.2.1",
     "classnames": "^2.2.6",
-    "gatsby": "^2.27.4",
+    "gatsby": "^4.25.7",
     "gatsby-plugin-react-helmet": "^3.5.0",
     "normalize.css": "^8.0.1",
     "react": "^16.14.0",
